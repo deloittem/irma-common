@@ -27,10 +27,11 @@ class IrmaFTP(object):
     # ==================================
     #  Constructor and Destructor stuff
     # ==================================
-    def __init__(self, host, port, user, passwd,
+    def __init__(self, host, port, auth, user, passwd,
                  dst_user, upload_path):
         self._host = host
         self._port = port
+        self._auth = auth
         self._user = user
         self._passwd = passwd
         self._dst_user = dst_user
