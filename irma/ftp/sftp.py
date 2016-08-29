@@ -33,9 +33,9 @@ class IrmaSFTP(IrmaFTP):
     # ==================================
     #  Constructor and Destructor stuff
     # ==================================
-    def __init__(self, host, port, auth, user, passwd,
+    def __init__(self, host, port, auth, key_path, user, passwd,
                  dst_user=None, upload_path='uploads'):
-        super(IrmaSFTP, self).__init__(host, port, auth, user,
+        super(IrmaSFTP, self).__init__(host, port, auth, key_path, user,
                                        passwd, dst_user, upload_path)
         self._client = None
         self._connect()
@@ -54,7 +54,7 @@ class IrmaSFTP(IrmaFTP):
             self._conn.packetizer.REKEY_BYTES = pow(2, 32)
             self._conn.packetizer.REKEY_PACKETS = pow(2, 32)
             if self._auth == 'key':
-                pkey = RSAKey.from_private_key_file('/home/irma/.ssh/id_rsa')
+                pkey = RSAKey.from_private_key_file(self._key_path)
                 self._conn.connect(username=self._user, pkey=pkey)
             else:
                 self._conn.connect(username=self._user, password=self._passwd)
